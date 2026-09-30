@@ -152,7 +152,7 @@ python audit_parity.py
 
 ## Mathematical & Formal Methods
 
-A full mathematical derivation of the scVI evidence lower bound (ELBO), zero-inflated negative binomial (ZINB) likelihood, MAGIC diffusion operators ($P^t$), and UCell rank equations is provided in [`docs/METHODS.md`](docs/METHODS.md).
+A full mathematical derivation of the scVI evidence lower bound (ELBO), zero-inflated negative binomial (ZINB) likelihood, MAGIC diffusion operators ($P^t$), and UCell rank equations is provided in [`METHODS.md`].
 
 ---
 
