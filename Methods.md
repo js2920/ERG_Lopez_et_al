@@ -1,6 +1,6 @@
 # Mathematical & Methodological Specifications
 
-### Research Code Companion for Lopez et al., *Nature Cancer* (2026)
+### Research Code Companion for Lopez et al. (2026)
 **Single-cell dissection of stemness programs and transcriptional plasticity in pediatric acute myeloid leukemia relapse**
 
 ---
@@ -318,7 +318,7 @@ p = 0.002712 \quad (p < 0.01)
 
 ## 6. References
 
-1. Lopez et al., *Single-cell dissection of stemness programs and transcriptional plasticity in pediatric acute myeloid leukemia relapse*. *Nature Cancer* (2026).
+1. Lopez et al.(2026).
 2. Lopez, R. et al. Deep generative modeling for single-cell transcriptomics. *Nat. Methods* 15, 1053–1058 (2018).
 3. Xu, C. et al. Probabilistic harmonization and annotation of single-cell transcriptomics data with scANVI. *Mol. Syst. Biol.* 17, e10082 (2021).
 4. van Dijk, D. et al. Recovering Gene Interactions from Single-Cell Data Using Data Diffusion. *Cell* 174, 716–729 (2018).
