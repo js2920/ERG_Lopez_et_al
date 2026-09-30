@@ -113,9 +113,10 @@ The analytical workflow is consolidated into three self-contained, executable sc
 
 | Script | Purpose | Output | CLI Execution |
 | :--- | :--- | :--- | :--- |
-| **[`render_figures.py`](render_figures.py)** | Renders **Figure 4** (Progenitor UMAPs: ERG MAGIC & LSC17 UCell) and **Figure 11** (Matched ERG fraction diagonal shift across 20 cohorts) | Publication PNG (400 DPI), vector PDF, and editable SVG | `python render_figures.py --figures all` |
-| **[`audit_parity.py`](audit_parity.py)** | Unit-level statistical assertion suite checking exact parity against reported paper statistics ($15/20$ expand, $p = 
-| **[`train_scvi_scanvi.py`](train_scvi_scanvi.py)** | End-to-end deep generative integration: multi-compartment ranked HVGs, weighted training, unsupervised scVI, semi-supervised scANVI, and MAGIC diffusion | Converged joint AnnData (`joint_scvi_G.h5ad`) | `python train_scvi_scanvi.py` |
+| **[`scripts/train_scvi_scanvi.py`](scripts/train_scvi_scanvi.py)** | End-to-end deep generative integration: multi-compartment ranked HVGs, weighted training, unsupervised scVI, semi-supervised scANVI, and MAGIC diffusion | Converged joint AnnData (`joint_scvi_G.h5ad`) | `python train_scvi_scanvi.py` |
+| **[`scripts/render_figures.py`](scripts/render_figures.py)** | Renders the Progenitor UMAPs: ERG MAGIC & LSC17 UCell and the Matched ERG fraction diagonal shift across 20 cohorts figurs | Publication PNG (400 DPI), vector PDF, and editable SVG | `python render_figures.py --figures all` |
+| **[`scripts/audit_parity.py`](scripts/audit_parity.py)** | Unit-level statistical assertion suite checking exact parity against reported paper statistics ($15/20$ expand, $p = 
+
 
 ---
 
