@@ -14,7 +14,7 @@
 
 <br/>
 
-[Overview](#overview) • [Key Publication Figures](#key-publication-figures) • [Reproduction Quickstart](#reproduction-quickstart) • [Analytical Framework](#analytical-framework) • [Pipeline Scripts](#pipeline-scripts--modules) • [Audit & Parity](#statistical-validation--parity-audit) • [Methods & Data](#mathematical--formal-methods)
+[Overview](#overview) • [Key Publication Figures](#key-publication-figures) • [Reproduction Quickstart](#reproduction-quickstart) • [Analytical Framework](#analytical-framework) • [Pipeline Scripts](#pipeline-scripts) • [Audit & Parity](#statistical-validation--parity-audit) • [Methods & Data](#mathematical--formal-methods)
 
 </div>
 
@@ -37,6 +37,7 @@ Therapeutic resistance and relapse in pediatric AML remain predominantly driven 
 - **Paired Clonal Inference**: Rigorous Wilcoxon signed-rank paired testing evaluating 176,397 malignant blasts across 20 matched patient pairs.
 
 
+
 ---
 
 ## Reproduction Quickstart
@@ -54,7 +55,12 @@ conda activate erg-lopez-et-al
 ./run_all.sh
 ```
 
-
+Alternatively, standard target rules are provided via [`Makefile`](Makefile):
+```bash
+make audit      # Execute automated numerical parity assertions (< 1 second)
+make figures    # Render publication-ready Figures 4 and 11
+make all        # Execute full audit and figure generation pipeline
+```
 
 ---
 
@@ -110,27 +116,21 @@ flowchart TD
 
 ---
 
-## Pipeline Scripts & Modules
+## Pipeline Scripts
 
-The codebase is organized into sequential computational stages located in [`scripts/`](scripts/):
+The analytical workflow is consolidated into three self-contained, executable scripts in the repository root:
 
-| Script | Stage | Description | CLI Command |
+| Script | Purpose | Output | CLI Execution |
 | :--- | :--- | :--- | :--- |
-| [`scripts/01_harmonize_and_hvg.py`](scripts/01_harmonize_and_hvg.py) | **01** | Lineage ontology harmonization and 4,000 consensus ranked HVG selection | `python scripts/01_harmonize_and_hvg.py` |
-| [`scripts/02_train_scvi.py`](scripts/02_train_scvi.py) | **02** | Unsupervised scVI pretraining with patient-level batch preservation | `python scripts/02_train_scvi.py --seed 43` |
-| [`scripts/03_train_scanvi_holdout.py`](scripts/03_train_scanvi_holdout.py) | **03** | Semi-supervised scANVI transfer, 20% holdout audit, and model selection | `python scripts/03_train_scanvi_holdout.py` |
-| [`scripts/04_magic_imputation.py`](scripts/04_magic_imputation.py) | **04** | Timepoint-isolated MAGIC graph diffusion on log1p(CP10k) normalized counts | `python scripts/04_magic_imputation.py` |
-| [`scripts/05_lsc17_ucell_scoring.py`](scripts/05_lsc17_ucell_scoring.py) | **05** | Single-cell direction-aware LSC17 stemness scoring (11 up minus 6 down genes) | `python scripts/05_lsc17_ucell_scoring.py` |
-| [`scripts/06_render_figure_04.py`](scripts/06_render_figure_04.py) | **06** | Generates **Figure 4** (Progenitor UMAPs: ERG MAGIC & LSC17 UCell; PNG/PDF/SVG) | `python scripts/06_render_figure_04.py` |
-| [`scripts/07_render_figure_11.py`](scripts/07_render_figure_11.py) | **07** | Generates **Figure 11** (Matched ERG fraction diagonal shift across 20 cohorts; PNG/PDF/SVG) | `python scripts/07_render_figure_11.py` |
-| [`scripts/08_audit_statistical_parity.py`](scripts/08_audit_statistical_parity.py) | **08** | Automated assertion suite validating exact numerical parity against paper statistics | `python scripts/08_audit_statistical_parity.py` |
-| [`run_full_pipeline.py`](run_full_pipeline.py) | **Master** | Master execution interface to trigger individual phases or end-to-end workflow | `python run_full_pipeline.py --step all` |
+| **[`render_figures.py`](render_figures.py)** | Renders **Figure 4** (Progenitor UMAPs: ERG MAGIC & LSC17 UCell) and **Figure 11** (Matched ERG fraction diagonal shift across 20 cohorts) | Publication PNG (400 DPI), vector PDF, and editable SVG | `python render_figures.py --figures all` |
+| **[`audit_parity.py`](audit_parity.py)** | Unit-level statistical assertion suite checking exact parity against reported paper statistics ($15/20$ expand, $p = 
+| **[`train_scvi_scanvi.py`](train_scvi_scanvi.py)** | End-to-end deep generative integration: multi-compartment ranked HVGs, weighted training, unsupervised scVI, semi-supervised scANVI, and MAGIC diffusion | Converged joint AnnData (`joint_scvi_G.h5ad`) | `python train_scvi_scanvi.py` |
 
 ---
 
 ## Statistical Validation & Parity Audit
 
-The verification test suite ([`scripts/08_audit_statistical_parity.py`](scripts/08_audit_statistical_parity.py)) evaluates computed pipeline outputs directly against the locked manuscript benchmarks:
+The verification test suite ([`audit_parity.py`](audit_parity.py)) evaluates computed pipeline outputs directly against the locked manuscript benchmarks:
 
 | Statistical Metric | Reported Manuscript Value | Computed Package Value | Verification Status |
 | :--- | :---: | :---: | :---: |
@@ -143,9 +143,9 @@ The verification test suite ([`scripts/08_audit_statistical_parity.py`](scripts/
 | **Normal Progenitor Concordance** | $\ge 85.0\%$ | $88.91\%$ | Confirmed |
 | **Malignancy Mixing (Signal Retention)** | $\le 5.0\%$ | $1.83\%$ | Confirmed |
 
-To run the audit suite independently:
+To run the audit suite directly:
 ```bash
-python scripts/08_audit_statistical_parity.py --out-json ./audit_report.json
+python audit_parity.py
 ```
 
 ---
