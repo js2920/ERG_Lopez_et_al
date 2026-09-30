@@ -55,15 +55,6 @@ conda activate erg-lopez-et-al
 ./run_all.sh
 ```
 
-Alternatively, standard target rules are provided via [`Makefile`](Makefile):
-```bash
-make audit      # Execute automated numerical parity assertions (< 1 second)
-make figures    # Render publication-ready Figures 4 and 11
-make all        # Execute full audit and figure generation pipeline
-```
-
----
-
 ## Analytical Framework
 
 ```mermaid
