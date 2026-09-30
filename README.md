@@ -6,6 +6,7 @@
 **Research Code & Data Companion**
 
 [![GitHub: js2920/ERG_Lopez_et_al](https://img.shields.io/badge/GitHub-js2920%2FERG__Lopez__et__al-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/js2920/ERG_Lopez_et_al)
+[![DOI: 10.5281/zenodo.23058363](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.23058363-007EC6?style=for-the-badge&logo=zenodo&logoColor=white)](https://zenodo.org/records/23058363)
 [![Python: 3.10+](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![scverse: scvi-tools](https://img.shields.io/badge/scverse-scvi--tools%20v1.1+-4361EE?style=for-the-badge&logo=scverse&logoColor=white)](https://scvi-tools.org/)
 [![PyTorch: 2.0+](https://img.shields.io/badge/PyTorch-2.0%2B-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org/)
@@ -35,11 +36,12 @@ Therapeutic resistance and relapse in pediatric AML remain predominantly driven 
 - **Direction-Aware Stemness Quantification (pyUCell)**: Single-cell resolution scoring of the clinically validated 17-gene LSC17 signature.
 - **Paired Clonal Inference**: Rigorous Wilcoxon signed-rank paired testing evaluating 176,397 malignant blasts across 20 matched patient pairs.
 
+
 ---
 
 ## Reproduction Quickstart
 
-The full figure generation suite and numerical audit can be executed  using precomputed tables, or recomputed end-to-end from raw count matrices.
+The full figure generation suite and numerical audit can be executed in under one minute using precomputed tables, or recomputed end-to-end from raw count matrices.
 
 ```bash
 # 1. Clone repository & create conda environment
@@ -52,12 +54,7 @@ conda activate erg-lopez-et-al
 ./run_all.sh
 ```
 
-Alternatively, standard target rules are provided via [`Makefile`](Makefile):
-```bash
-make audit      # Execute automated numerical parity assertions
-make figures    # Render publication-ready Figures 4 and 11
-make all        # Execute full audit and figure generation pipeline
-```
+
 
 ---
 
@@ -162,6 +159,7 @@ A full mathematical derivation of the scVI evidence lower bound (ELBO), zero-inf
 ## Data Availability & Citations
 
 ### Primary Datasets
+- **Trained Latent Space & Coordinates (`joint_scvi_G.h5ad`)**: Lopez et al., *Harmonized Single-Cell scANVI Latent Space and UMAP Coordinates for Pediatric AML Relapse and Hematopoietic Progenitors*. **Zenodo** (2026). DOI: [10.5281/zenodo.23058363](https://doi.org/10.5281/zenodo.23058363) ([Record 23058363](https://zenodo.org/records/23058363)).
 - **Pediatric AML Cohort**: Lambo et al., *The genomic and transcriptomic landscape of pediatric AML relapse*. *Cancer Cell* (GEO Accession: [GSE235063](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE235063)).
 - **Circulating CD34+ HSPCs (Lifespan Atlas)**: Furer, N., Rappoport, N., Milman, O. ... Tanay, A., Shlush, L. I. *A reference model of circulating hematopoietic stem cells across the lifespan with applications to diagnostics*. *Nature Medicine* 31, 2442–2451 (2025). (CZ CELLxGENE Collection: [5542eeb0-96ef-4ab9-95ea-eb6abc178461](https://cellxgene.cziscience.com/collections/5542eeb0-96ef-4ab9-95ea-eb6abc178461); GEO: [GSE285943](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE285943)).
 - **Human Fetal Liver Progenitors**: Suo et al., *Mapping the developing human immune system across development*. *Science* 376, eabo0510 (2022).
