@@ -169,7 +169,7 @@ A full mathematical derivation of the scVI evidence lower bound (ELBO), zero-inf
 ## Data Availability & Citations
 
 ### Primary Datasets
-- **Trained Latent Space & Coordinates (`joint_scvi_G.h5ad`)**: Lopez et al., *Harmonized Single-Cell scANVI Latent Space and UMAP Coordinates for Pediatric AML Relapse and Hematopoietic Progenitors*. **Zenodo** (2026). DOI: [10.5281/zenodo.23058363](https://doi.org/10.5281/zenodo.23058363) ([Record 23058363](https://zenodo.org/records/23058363)).
+- **Trained Latent Space & Coordinates (`joint_scvi_G.h5ad`)**: Lopez et al., *Harmonized Single-Cell scANVI Latent Space and UMAP Coordinates for Pediatric AML Relapse and Hematopoietic Progenitors*. **Zenodo** (2026). (https://zenodo.org/records/23190094) DOI 10.5281/zenodo.23058362.
 - **Pediatric AML Cohort**: Lambo et al., *The genomic and transcriptomic landscape of pediatric AML relapse*. *Cancer Cell* (GEO Accession: [GSE235063](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE235063)).
 - **Circulating CD34+ HSPCs (Lifespan Atlas)**: Furer, N., Rappoport, N., Milman, O. ... Tanay, A., Shlush, L. I. *A reference model of circulating hematopoietic stem cells across the lifespan with applications to diagnostics*. *Nature Medicine* 31, 2442–2451 (2025). (CZ CELLxGENE Collection: [5542eeb0-96ef-4ab9-95ea-eb6abc178461](https://cellxgene.cziscience.com/collections/5542eeb0-96ef-4ab9-95ea-eb6abc178461); GEO: [GSE285943](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE285943)).
 - **Human Fetal Liver Progenitors**: Suo et al., *Mapping the developing human immune system across development*. *Science* 376, eabo0510 (2022).
