@@ -1,5 +1,9 @@
 <div align="center">
 
+<img src="ERG_Lopez_et_al_v3.svg"
+     width="100%"
+     alt="ERG research companion: Bauhaus-inspired banner with an illustrative AML blast"/>
+
 # ERG_Lopez_et_al
 
 ### Single-cell dissection of stemness programs and transcriptional plasticity in acute myeloid leukemia relapse
@@ -27,22 +31,19 @@
 
 ## Overview
 
-Therapeutic resistance and relapse in pediatric AML remain predominantly driven by the survival and expansion of leukemic stem cells (LSCs). This codebase provides the complete computational pipeline developed to test whether transcriptional activation of the ETS-family transcription factor **ERG** marks an immature, treatment-refractory blast state that undergoes clonal expansion at relapse.
+Therapeutic resistance and relapse in pediatric AML remain predominantly driven by the survival and expansion of leukemic stem cells (LSCs). This codebase provides the  computational pipeline developed to test whether transcriptional activation of the ETS-family transcription factor **ERG** marks an immature, treatment-refractory blast state that undergoes expansion at relapse.
 
 ### Key Computational Tenets
-- **Harmonized Generative Integration**: Overcomes technical batch confounding between disease and developmental controls without erasing temporal relapse dynamics by assigning patient-level batch keys (`aml_id`).
-- **Semi-Supervised Latent Transfer (scANVI)**: Benchmarked across triplicate seeds with held-out normal progenitor validation (88.9% concordance) and strict preservation of malignant divergence.
+- **Harmonized Generative Integration**: compensates for technical batch confounding between disease and developmental controls without erasing temporal relapse dynamics by assigning patient-level batch keys (`aml_id`).
+- **Semi-Supervised Latent Transfer (scANVI)**: Benchmarked across triplicate seeds with held-out normal progenitor validation (88.9% concordance) and  preservation of malignant divergence.
 - **Timepoint-Isolated Manifold Imputation (MAGIC)**: Solves single-cell dropout for regulatory transcription factors without across-condition information leakage.
 - **Direction-Aware Stemness Quantification (pyUCell)**: Single-cell resolution scoring of the clinically validated 17-gene LSC17 signature.
-- **Paired Clonal Inference**: Rigorous Wilcoxon signed-rank paired testing evaluating 176,397 malignant blasts across 20 matched patient pairs.
-
-
+- **Paired Clonal Inference**:  Wilcoxon signed-rank paired testing evaluating 176,397 malignant blasts across 20 matched patient pairs.
 
 ---
 
 ## Reproduction Quickstart
 
-The full figure generation suite and numerical audit can be executed in under one minute using precomputed tables, or recomputed end-to-end from raw count matrices.
 
 ```bash
 # 1. Clone repository & create conda environment
@@ -54,8 +55,24 @@ conda activate erg-lopez-et-al
 # 2. Run automated validation audit and generate publication figures (PNG, PDF, SVG)
 ./run_all.sh
 ```
+---
 
 ## Analytical Framework
+
+<p align="center">
+  <a href="analytical_framework_G_rev_20261006_02.svg">
+    <img src="analytical_framework_G_rev_20261006_02.svg"
+         width="100%"
+         alt="ERG single-cell analytical framework"/>
+  </a>
+</p>
+
+<p align="center">
+  <em>Analytical workflow schematic. Click the figure to view the full SVG.</em>
+</p>
+
+<details>
+<summary>View the text-based workflow diagram</summary>
 
 ```mermaid
 flowchart TD
@@ -105,6 +122,8 @@ flowchart TD
     style Step5 fill:#e2e3e5,stroke:#343a40,stroke-width:1.5px
 ```
 
+</details>
+
 ---
 
 ## Pipeline Scripts
@@ -113,10 +132,9 @@ The analytical workflow is consolidated into three self-contained, executable sc
 
 | Script | Purpose | Output | CLI Execution |
 | :--- | :--- | :--- | :--- |
-| **[`scripts/train_scvi_scanvi.py`](scripts/train_scvi_scanvi.py)** | End-to-end deep generative integration: multi-compartment ranked HVGs, weighted training, unsupervised scVI, semi-supervised scANVI, and MAGIC diffusion | Converged joint AnnData (`joint_scvi_G.h5ad`) | `python train_scvi_scanvi.py` |
-| **[`scripts/render_figures.py`](scripts/render_figures.py)** | Renders the Progenitor UMAPs: ERG MAGIC & LSC17 UCell and the Matched ERG fraction diagonal shift across 20 cohorts figurs | Publication PNG (400 DPI), vector PDF, and editable SVG | `python render_figures.py --figures all` |
-| **[`scripts/audit_parity.py`](scripts/audit_parity.py)** | Unit-level statistical assertion suite checking exact parity against reported paper statistics ($15/20$ expand, $p = 
-
+| **[`render_figures.py`](render_figures.py)** | Renders **Figure 4** (Progenitor UMAPs: ERG MAGIC & LSC17 UCell) and **Figure 11** (Matched ERG fraction diagonal shift across 20 cohorts) | Publication PNG (400 DPI), vector PDF, and editable SVG | `python render_figures.py --figures all` |
+| **[`audit_parity.py`](audit_parity.py)** | Unit-level statistical assertion suite checking exact parity against reported paper statistics (15/20 expand, p = 0.00271, 11.1% → 19.6%) | Console logs & JSON report | `python audit_parity.py` |
+| **[`train_scvi_scanvi.py`](train_scvi_scanvi.py)** | End-to-end deep generative integration: multi-compartment ranked HVGs, weighted training, unsupervised scVI, semi-supervised scANVI, and MAGIC diffusion | Converged joint AnnData (`joint_scvi_G.h5ad`) | `python train_scvi_scanvi.py` |
 
 ---
 
@@ -144,7 +162,7 @@ python audit_parity.py
 
 ## Mathematical & Formal Methods
 
-A full mathematical derivation of the scVI evidence lower bound (ELBO), zero-inflated negative binomial (ZINB) likelihood, MAGIC diffusion operators ($P^t$), and UCell rank equations is provided in [`METHODS.md`].
+A full mathematical derivation of the scVI evidence lower bound (ELBO), zero-inflated negative binomial (ZINB) likelihood, MAGIC diffusion operators ($P^t$), and UCell rank equations is provided in [`Methods.md`](Methods.md).
 
 ---
 
@@ -163,7 +181,3 @@ A full mathematical derivation of the scVI evidence lower bound (ELBO), zero-inf
 4. Andreatta, M. & Carmona, S. J. UCell: Robust and scalable single-cell gene signature scoring. *Comp. Struct. Biotechnol. J.* 19, 3796–3798 (2021).
 5. Ng, S. W. et al. A 17-gene stemness score for rapid determination of risk in acute leukaemia. *Nature* 540, 433–437 (2016).
 
----
-
-## License
-This project is open-sourced under the terms of the [MIT License](LICENSE).
